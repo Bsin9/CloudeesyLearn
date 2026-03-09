@@ -1,0 +1,27 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/videos/*", "/images/*", "/js/*", "/css/*", "*.{png,jpg,gif,ico,css,js,mp4,svg,webp,woff,woff2}"]
+  },
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/index.html"
+    }
+  ],
+  "globalHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.cloudeesy.com; media-src 'self'; connect-src 'self'; frame-ancestors 'none'",
+    "Cache-Control": "public, max-age=3600"
+  },
+  "mimeTypes": {
+    ".mp4": "video/mp4",
+    ".svg": "image/svg+xml",
+    ".webp": "image/webp"
+  }
+}

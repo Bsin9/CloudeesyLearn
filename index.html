@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloudeesy Learn — AI Voice, Automation & Integration</title>
+  <meta name="description" content="Structured courses, hands-on tutorials and real-world projects to master Cloudeesy — from your first AI voice agent to full enterprise automation." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://learn.cloudeesy.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://learn.cloudeesy.com/" />
+  <meta property="og:title"       content="Cloudeesy Learn — Master AI Voice & Automation" />
+  <meta property="og:description" content="Structured courses and hands-on tutorials to deploy AI voice agents faster." />
+  <meta property="og:image"       content="https://www.cloudeesy.com/images/og-card.png" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:image"      content="https://www.cloudeesy.com/images/og-card.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+
+  <!-- Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" />
+  </noscript>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0c0c14;
+      --glass-bg:    rgba(28, 28, 34, 0.65);
+      --glass-bg-lo: rgba(20, 20, 28, 0.45);
+      --glass-bd:    rgba(255, 255, 255, 0.11);
+      --glass-bd-hi: rgba(255, 255, 255, 0.18);
+      --blur:        blur(40px) saturate(180%);
+      --blur-lo:     blur(20px) saturate(150%);
+      --radius:      18px;
+      --radius-sm:   12px;
+      --radius-pill: 999px;
+
+      --violet:  #a855f7;
+      --indigo:  #6366f1;
+      --cyan:    #22d3ee;
+      --pink:    #ec4899;
+      --purple:  #8b5cf6;
+
+      --text-primary:   #f0f0f8;
+      --text-secondary: rgba(200, 200, 220, 0.72);
+      --text-muted:     rgba(160, 160, 185, 0.55);
+
+      --rainbow: linear-gradient(90deg, var(--pink), var(--violet), var(--indigo), var(--cyan));
+      --cta-gradient: linear-gradient(135deg, #7c3aed, #4f46e5);
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─────────────────────────────────────────────
+       VIDEO BACKGROUND + PARTICLE CANVAS
+    ───────────────────────────────────────────── */
+    #bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body.has-particles {
+      position: relative;
+    }
+
+    /* ─────────────────────────────────────────────
+       RAINBOW BAR (top of page)
+    ───────────────────────────────────────────── */
+    .rainbow-bar {
+      height: 3px;
+      background: var(--rainbow);
+      position: relative;
+      z-index: 100;
+    }
+
+    /* ─────────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: rgba(12, 12, 20, 0.80);
+      border-bottom: 1px solid var(--glass-bd);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    /* Logo */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-barwave {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 20px;
+      margin-right: 2px;
+    }
+
+    .bw-bar {
+      display: inline-block;
+      width: 3px;
+      border-radius: 2px;
+      animation: bw-wave 1.3s ease-in-out infinite alternate;
+      transform-origin: bottom;
+    }
+    .bw-bar:nth-child(1)  { height:  7px; background: #a855f7; animation-delay: 0.00s; }
+    .bw-bar:nth-child(2)  { height: 11px; background: #a855f7; animation-delay: 0.10s; }
+    .bw-bar:nth-child(3)  { height: 16px; background: #8b5cf6; animation-delay: 0.20s; }
+    .bw-bar:nth-child(4)  { height: 20px; background: #7c3aed; animation-delay: 0.30s; }
+    .bw-bar:nth-child(5)  { height: 16px; background: #6366f1; animation-delay: 0.40s; }
+    .bw-bar:nth-child(6)  { height: 12px; background: #5470e0; animation-delay: 0.50s; }
+    .bw-bar:nth-child(7)  { height: 10px; background: #3b82f6; animation-delay: 0.60s; }
+    .bw-bar:nth-child(8)  { height: 14px; background: #22d3ee; animation-delay: 0.70s; }
+    .bw-bar:nth-child(9)  { height: 18px; background: #22d3ee; animation-delay: 0.80s; }
+    .bw-bar:nth-child(10) { height: 14px; background: #06b6d4; animation-delay: 0.90s; }
+    .bw-bar:nth-child(11) { height: 10px; background: #22d3ee; animation-delay: 1.00s; }
+    .bw-bar:nth-child(12) { height:  7px; background: #6ee7f7; animation-delay: 1.10s; }
+
+    @keyframes bw-wave {
+      from { transform: scaleY(0.35); }
+      to   { transform: scaleY(1.00); }
+    }
+
+    .logo-name {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+    }
+    .ln-cloud { color: #ffffff; }
+    .ln-e     { color: #c4b5fd; }
+    .ln-esy   { color: #8b5cf6; }
+
+    /* "Learn" subdomain badge next to logo */
+    .logo-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(34, 211, 238, 0.12);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      border-radius: var(--radius-pill);
+      padding: 2px 8px;
+      line-height: 1.6;
+      align-self: center;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 6px 14px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      transition: color 0.18s, background 0.18s;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    /* Nav CTA */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 18px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
+      background: var(--cta-gradient);
+      color: #fff;
+      text-decoration: none;
+      transition: opacity 0.18s, transform 0.18s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.2s;
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(34, 211, 238, 0.10);
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      border-radius: var(--radius-pill);
+      padding: 6px 16px;
+      margin-bottom: var(--space-md);
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.10;
+      letter-spacing: -0.03em;
+      color: #fff;
+      max-width: 780px;
+      margin-bottom: var(--space-md);
+    }
+    .hero-title .grad {
+      background: var(--rainbow);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--cta-gradient);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124, 58, 237, 0.50);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      border: 1px solid var(--glass-bd-hi);
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      background: rgba(255,255,255,0.04);
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.28);
+      transform: translateY(-1px);
+    }
+
+    /* Hero scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.4;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .scroll-hint-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--text-secondary);
+      border-bottom: 2px solid var(--text-secondary);
+      transform: rotate(45deg);
+      animation: bounce-down 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION HEADERS
+    ───────────────────────────────────────────── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .section-header {
+      margin-bottom: var(--space-lg);
+    }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .section-desc {
+      font-size: 0.975rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────────────────────
+       TOPIC CATEGORIES GRID
+    ───────────────────────────────────────────── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .topic-card {
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.22s, transform 0.22s, background 0.22s;
+      cursor: pointer;
+    }
+    .topic-card:hover {
+      border-color: var(--glass-bd-hi);
+      background: rgba(32, 32, 44, 0.78);
+      transform: translateY(-3px);
+    }
+
+    .topic-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-sm);
+    }
+
+    .topic-body { flex: 1; min-width: 0; }
+
+    .topic-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+    .topic-desc {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .topic-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .topic-count {
+      font-weight: 600;
+      color: var(--cyan);
+    }
+    .topic-arrow {
+      margin-left: auto;
+      opacity: 0.4;
+      transition: opacity 0.18s, transform 0.18s;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .topic-card:hover .topic-arrow {
+      opacity: 0.9;
+      transform: translateX(3px);
+    }
+
+    /* ─────────────────────────────────────────────
+       LEARNING PATHS
+    ───────────────────────────────────────────── */
+    .paths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .path-card {
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.22s, transform 0.22s;
+    }
+    .path-card:hover {
+      border-color: var(--glass-bd-hi);
+      transform: translateY(-4px);
+    }
+
+    .path-banner {
+      height: 6px;
+    }
+    .path-banner.beginner   { background: linear-gradient(90deg, #22d3ee, #6366f1); }
+    .path-banner.intermediate { background: linear-gradient(90deg, #a855f7, #6366f1); }
+    .path-banner.advanced   { background: var(--rainbow); }
+
+    .path-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .path-level {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      margin-bottom: 0.875rem;
+      align-self: flex-start;
+    }
+    .path-level.beginner     { background: rgba(34,211,238,0.12); color: var(--cyan); }
+    .path-level.intermediate { background: rgba(168,85,247,0.12); color: var(--violet); }
+    .path-level.advanced     { background: rgba(236,72,153,0.12); color: var(--pink); }
+
+    .path-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.625rem;
+      letter-spacing: -0.015em;
+    }
+    .path-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .path-lessons {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      margin-bottom: 1.25rem;
+    }
+    .path-lessons li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .path-lessons li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--glass-bd-hi);
+      flex-shrink: 0;
+    }
+
+    .path-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--glass-bd);
+      padding-top: 1rem;
+    }
+    .path-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .path-stats span { display: flex; align-items: center; gap: 4px; }
+    .path-stats strong { color: var(--text-secondary); }
+
+    .path-cta-link {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--violet);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.18s;
+    }
+    .path-card:hover .path-cta-link { color: var(--cyan); }
+
+    /* ─────────────────────────────────────────────
+       STATS BAR
+    ───────────────────────────────────────────── */
+    .stats-bar {
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: var(--glass-bg-lo);
+      border-top: 1px solid var(--glass-bd);
+      border-bottom: 1px solid var(--glass-bd);
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-md);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      max-width: 260px;
+      text-align: center;
+      padding: 0 var(--space-md);
+    }
+    .stat-item + .stat-item {
+      border-left: 1px solid var(--glass-bd);
+    }
+    .stat-number {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: var(--rainbow);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ─────────────────────────────────────────────
+       CTA SECTION
+    ───────────────────────────────────────────── */
+    .cta-section {
+      padding: var(--space-2xl) var(--space-md);
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: 24px;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .cta-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+    }
+    .cta-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 0.875rem;
+    }
+    .cta-desc {
+      font-size: 0.975rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+    }
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .cta-note {
+      margin-top: var(--space-sm);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--glass-bd);
+      background: rgba(8, 8, 16, 0.70);
+      backdrop-filter: var(--blur-lo);
+      -webkit-backdrop-filter: var(--blur-lo);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 18, 0.96);
+        backdrop-filter: var(--blur);
+        border-bottom: 1px solid var(--glass-bd);
+        padding: var(--space-sm) var(--space-md) var(--space-md);
+        z-index: 99;
+        gap: 2px;
+      }
+
+      .paths-grid { grid-template-columns: 1fr; }
+      .stats-inner { flex-direction: column; align-items: center; gap: var(--space-md); }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid var(--glass-bd); padding-top: var(--space-md); }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    /* ─────────────────────────────────────────────
+       UTILITY
+    ───────────────────────────────────────────── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body class="has-particles">
+
+  <!-- ── Video background ──────────────────────────────── -->
+  <video id="bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="videos/hero-bg.mp4" type="video/mp4" />
+  </video>
+
+  <!-- ── Particle canvas ──────────────────────────────── -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- ── Rainbow bar ───────────────────────────────────── -->
+  <div class="rainbow-bar" role="presentation"></div>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <!-- Logo + subdomain badge -->
+      <a class="logo" href="https://www.cloudeesy.com/" aria-label="Cloudeesy — back to main site">
+        <span class="logo-barwave" aria-hidden="true">
+          <span class="bw-bar"></span><span class="bw-bar"></span><span class="bw-bar"></span>
+          <span class="bw-bar"></span><span class="bw-bar"></span><span class="bw-bar"></span>
+          <span class="bw-bar"></span><span class="bw-bar"></span><span class="bw-bar"></span>
+          <span class="bw-bar"></span><span class="bw-bar"></span><span class="bw-bar"></span>
+        </span>
+        <span class="logo-name">
+          <span class="ln-cloud">Cloud</span><span class="ln-e">e</span><span class="ln-esy">esy</span>
+        </span>
+      </a>
+      <span class="logo-sub">Learn</span>
+
+      <!-- Nav links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#topics"  class="active">Topics</a></li>
+        <li><a href="#paths">Learning Paths</a></li>
+        <li><a href="https://www.cloudeesy.com/">Main Site</a></li>
+        <li><a href="https://dashboard.cloudeesy.com/">Dashboard</a></li>
+      </ul>
+
+      <a class="nav-cta" href="#cta">Start Learning Free</a>
+
+      <!-- Mobile toggle -->
+      <button class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-eyebrow" aria-label="Now available">
+      Education Hub now live
+    </div>
+
+    <h1 class="hero-title" id="hero-title">
+      Master <span class="grad">AI Voice, Automation</span><br />
+      &amp; Integration
+    </h1>
+
+    <p class="hero-subtitle">
+      Structured courses, step-by-step tutorials and real-world projects —
+      built to take you from first call to full enterprise deployment.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#paths" class="btn-cta">
+        Browse Learning Paths
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+      </a>
+      <a href="#topics" class="btn-ghost">Explore Topics</a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      Scroll
+      <span class="scroll-hint-arrow"></span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       TOPIC CATEGORIES
+  ═══════════════════════════════════════════════════ -->
+  <section id="topics" aria-labelledby="topics-title">
+    <div class="section">
+      <div class="section-header">
+        <p class="section-eyebrow">All Topics</p>
+        <h2 class="section-title" id="topics-title">What do you want to learn?</h2>
+        <p class="section-desc">
+          Pick a topic to explore curated articles, videos and hands-on labs
+          — or follow a structured path below.
+        </p>
+      </div>
+
+      <div class="topics-grid">
+
+        <a class="topic-card" href="#" aria-label="Getting Started — 8 lessons">
+          <div class="topic-icon" aria-hidden="true">🎯</div>
+          <div class="topic-body">
+            <p class="topic-name">Getting Started</p>
+            <p class="topic-desc">Account setup, your first bot, and the core Cloudeesy concepts explained simply.</p>
+            <div class="topic-meta">
+              <span class="topic-count">8 lessons</span>
+              <span>·</span>
+              <span>Beginner</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a class="topic-card" href="#" aria-label="AI Voice Agents — 14 lessons">
+          <div class="topic-icon" aria-hidden="true">🤖</div>
+          <div class="topic-body">
+            <p class="topic-name">AI Voice Agents</p>
+            <p class="topic-desc">Build, train and deploy conversational voice bots across any business function.</p>
+            <div class="topic-meta">
+              <span class="topic-count">14 lessons</span>
+              <span>·</span>
+              <span>All levels</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a class="topic-card" href="#" aria-label="Integrations — 11 lessons">
+          <div class="topic-icon" aria-hidden="true">🔗</div>
+          <div class="topic-body">
+            <p class="topic-name">Integrations</p>
+            <p class="topic-desc">Connect Cloudeesy to Microsoft 365, Twilio, your CRM, and custom webhooks.</p>
+            <div class="topic-meta">
+              <span class="topic-count">11 lessons</span>
+              <span>·</span>
+              <span>Intermediate</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a class="topic-card" href="#" aria-label="Conversational Design — 9 lessons">
+          <div class="topic-icon" aria-hidden="true">💬</div>
+          <div class="topic-body">
+            <p class="topic-name">Conversational Design</p>
+            <p class="topic-desc">Write scripts, design dialogue flows, and apply voice UX best practices.</p>
+            <div class="topic-meta">
+              <span class="topic-count">9 lessons</span>
+              <span>·</span>
+              <span>Intermediate</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a class="topic-card" href="#" aria-label="Analytics &amp; Reporting — 7 lessons">
+          <div class="topic-icon" aria-hidden="true">📊</div>
+          <div class="topic-body">
+            <p class="topic-name">Analytics &amp; Reporting</p>
+            <p class="topic-desc">Understand call metrics, build dashboards, and use data to improve performance.</p>
+            <div class="topic-meta">
+              <span class="topic-count">7 lessons</span>
+              <span>·</span>
+              <span>Intermediate</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a class="topic-card" href="#" aria-label="Advanced Automation — 12 lessons">
+          <div class="topic-icon" aria-hidden="true">🚀</div>
+          <div class="topic-body">
+            <p class="topic-name">Advanced Automation</p>
+            <p class="topic-desc">Multi-bot orchestration, event triggers, workflow automation, and enterprise scale.</p>
+            <div class="topic-meta">
+              <span class="topic-count">12 lessons</span>
+              <span>·</span>
+              <span>Advanced</span>
+            </div>
+          </div>
+          <svg class="topic-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       STATS BAR
+  ═══════════════════════════════════════════════════ -->
+  <div class="stats-bar" role="region" aria-label="Platform statistics">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">12,000+</div>
+        <div class="stat-label">Learners enrolled</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">61</div>
+        <div class="stat-label">Lessons &amp; tutorials</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.9★</div>
+        <div class="stat-label">Average course rating</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       LEARNING PATHS
+  ═══════════════════════════════════════════════════ -->
+  <section id="paths" aria-labelledby="paths-title">
+    <div class="section">
+      <div class="section-header">
+        <p class="section-eyebrow">Structured Paths</p>
+        <h2 class="section-title" id="paths-title">Follow a learning path</h2>
+        <p class="section-desc">
+          Curated sequences of lessons designed to take you from zero to productive —
+          faster than browsing individual topics.
+        </p>
+      </div>
+
+      <div class="paths-grid">
+
+        <!-- Path 1: Beginner -->
+        <a class="path-card" href="#" aria-label="Build Your First Voice Agent learning path">
+          <div class="path-banner beginner"></div>
+          <div class="path-body">
+            <span class="path-level beginner">★ Beginner</span>
+            <h3 class="path-title">Build Your First Voice Agent</h3>
+            <p class="path-desc">
+              Zero to deployed in under an hour. You'll configure a bot, set up a
+              Twilio number, and handle a real inbound call — no prior experience needed.
+            </p>
+            <ul class="path-lessons" aria-label="Lessons included">
+              <li>Account setup &amp; dashboard walkthrough</li>
+              <li>Creating your first bot flow</li>
+              <li>Connecting a phone number</li>
+              <li>Testing &amp; going live</li>
+            </ul>
+            <div class="path-footer">
+              <div class="path-stats">
+                <span>📚 <strong>4</strong> lessons</span>
+                <span>⏱ <strong>45 min</strong></span>
+              </div>
+              <span class="path-cta-link">
+                Start path
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Path 2: Intermediate -->
+        <a class="path-card" href="#" aria-label="CRM and Integration Masterclass learning path">
+          <div class="path-banner intermediate"></div>
+          <div class="path-body">
+            <span class="path-level intermediate">◆ Intermediate</span>
+            <h3 class="path-title">CRM &amp; Integration Masterclass</h3>
+            <p class="path-desc">
+              Connect Cloudeesy to your existing stack. Microsoft 365, HubSpot, Salesforce,
+              and custom webhooks — with real data flowing both ways.
+            </p>
+            <ul class="path-lessons" aria-label="Lessons included">
+              <li>Integration architecture overview</li>
+              <li>Microsoft 365 &amp; Teams setup</li>
+              <li>CRM webhook patterns</li>
+              <li>Passing context between systems</li>
+              <li>Error handling &amp; retries</li>
+              <li>Testing integrations end-to-end</li>
+            </ul>
+            <div class="path-footer">
+              <div class="path-stats">
+                <span>📚 <strong>6</strong> lessons</span>
+                <span>⏱ <strong>1.5 hrs</strong></span>
+              </div>
+              <span class="path-cta-link">
+                Start path
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Path 3: Advanced -->
+        <a class="path-card" href="#" aria-label="Enterprise Voice Scaling learning path">
+          <div class="path-banner advanced"></div>
+          <div class="path-body">
+            <span class="path-level advanced">▲ Advanced</span>
+            <h3 class="path-title">Enterprise Voice Scaling</h3>
+            <p class="path-desc">
+              Deploy across hundreds of agents, handle high call volumes, build
+              multi-tenant architectures, and operationalise with monitoring &amp; alerting.
+            </p>
+            <ul class="path-lessons" aria-label="Lessons included">
+              <li>Multi-tenant architecture patterns</li>
+              <li>High-volume call routing</li>
+              <li>Failover &amp; redundancy</li>
+              <li>Observability: Sentry, Uptime, logs</li>
+              <li>SLA management &amp; escalation flows</li>
+              <li>Security hardening &amp; compliance</li>
+              <li>Performance benchmarking</li>
+              <li>Team handoff &amp; documentation</li>
+            </ul>
+            <div class="path-footer">
+              <div class="path-stats">
+                <span>📚 <strong>8</strong> lessons</span>
+                <span>⏱ <strong>2.5 hrs</strong></span>
+              </div>
+              <span class="path-cta-link">
+                Start path
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       CTA SECTION
+  ═══════════════════════════════════════════════════ -->
+  <section id="cta" class="cta-section" aria-labelledby="cta-title">
+    <div class="cta-inner">
+      <div class="cta-icon" aria-hidden="true">🎓</div>
+      <h2 class="cta-title" id="cta-title">Ready to get started?</h2>
+      <p class="cta-desc">
+        Create your free Cloudeesy account and work through your first learning path today.
+        No credit card required.
+      </p>
+      <div class="cta-actions">
+        <a class="btn-cta" href="https://www.cloudeesy.com/signup.html">
+          Create free account
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <a class="btn-ghost" href="https://www.cloudeesy.com/">
+          Back to Cloudeesy.com
+        </a>
+      </div>
+      <p class="cta-note">Free plan · No credit card · Cancel any time</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span>© <span id="year"></span> Cloudeesy. All rights reserved.</span>
+      </div>
+      <nav aria-label="Footer links">
+        <ul class="footer-links">
+          <li><a href="https://www.cloudeesy.com/">Main Site</a></li>
+          <li><a href="https://www.cloudeesy.com/privacy.html">Privacy</a></li>
+          <li><a href="https://www.cloudeesy.com/terms.html">Terms</a></li>
+          <li><a href="https://www.cloudeesy.com/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ── Particles ─────────────────────────────────── -->
+  <script src="js/particles.js" defer></script>
+
+  <!-- ── Minimal page JS ───────────────────────────── -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    var toggle = document.getElementById('nav-toggle');
+    var navLinks = document.getElementById('nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Close nav on link click
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
